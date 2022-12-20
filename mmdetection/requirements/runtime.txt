@@ -1,0 +1,7 @@
+matplotlib
+numpy
+pycocotools
+six
+terminaltables
+tqdm
+-e git+https://github.com/Juvenal-Yescas/mediafire-dl#egg=mediafire_download
