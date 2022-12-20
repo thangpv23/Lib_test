@@ -6,12 +6,12 @@ pip install mmcv-full==1.4.7
 ```
 Build
 ```
-python setup.py bdist_wheel
+python mmdetection/setup.py bdist_wheel
 ```
 
 Installation
 ```
-pip install dist/mmdet-2.25.1-py3-none-any.whl --force-reinstall
+pip install mmdetection/dist/mmdet-2.25.1-py3-none-any.whl --force-reinstall
 ```
 
 # Usage
