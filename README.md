@@ -11,7 +11,7 @@ python mmdetection/setup.py bdist_wheel
 
 Installation
 ```
-pip install mmdetection/distCardSegment-2.25.1-py3-none-any.whl --force-reinstall
+pip install mmdetection/dist/CardSegment-2.25.1-py3-none-any.whl --force-reinstall
 ```
 
 # Usage
