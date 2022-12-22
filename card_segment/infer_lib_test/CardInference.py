@@ -174,7 +174,7 @@ class CardInference:
                     os.mkdir(save_path)
                 self.__model.show_result(image, results, out_file=os.path.join(save_path, save_name + '.jpg'))
         
-        print(result_dict)
+        # print(result_dict)
         
         return result_dict
 
