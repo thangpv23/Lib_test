@@ -22,7 +22,7 @@ def readme():
 
 
 cur_path = os.path.dirname(__file__)
-version_file =  cur_path+"/card_segment/mmdet/version.py"
+version_file =  os.path.join (cur_path,"card_segment/mmdet/version.py")
 
 
 def get_version():
