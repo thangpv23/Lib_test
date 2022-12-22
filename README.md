@@ -11,13 +11,13 @@ python mmdetection/setup.py bdist_wheel
 
 Installation
 ```
-pip install mmdetection/dist/mmdet-2.25.1-py3-none-any.whl --force-reinstall
+pip install mmdetection/distCardSegment-2.25.1-py3-none-any.whl --force-reinstall
 ```
 
 # Usage
 Import and use
 ```
-from infer_lib_test import CardInference
+from card_segment import CardInference
 
 ### load card segmentation model
 
