@@ -45,7 +45,7 @@ model.inference_on_image(img, save_path=path_to_save_folder)
 ```
 Example
 ```
-from ekyc_card_segmentation import CardInference
+from card_segment.infer_lib_test.CardInference
 
 model = CardInference(checkpoint='/home/trangtnt/projects/yolact_weights/r50_1x8_coco/latest.pth')
 
