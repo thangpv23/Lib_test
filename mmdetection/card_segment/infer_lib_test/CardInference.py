@@ -29,10 +29,12 @@ class CardInference:
         if config is None:
             current_file_location = Path(__file__).resolve().parent.parent
             config = os.path.join(current_file_location, 'configs/yolact/yolact_r50_1x8_coco.py')
-            
+        
         if checkpoint is None:
             url = 'https://www.mediafire.com/file/h0m6mm51xb1wc98/best_weight_phase3.pth'
             if not  os.path.exists('../workdir/weight.pth'):
+                
+                os.mkdir('../workdir')
                 mediafire_dl.download(url, '../workdir/weight.pth', quiet=False)
             else:
                 checkpoint = '../workdir/weight.pth'
