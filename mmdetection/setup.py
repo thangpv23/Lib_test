@@ -6,7 +6,7 @@ import platform
 import shutil
 import sys
 import warnings
-from setuptools import find_packages, setup
+from setuptools import find_packages, setup, find_namespace_packages
 
 import torch
 from torch.utils.cpp_extension import (BuildExtension, CppExtension,
@@ -19,7 +19,7 @@ def readme():
     return content
 
 
-version_file = 'mmdet/version.py'
+version_file = 'card_segment/mmdet/version.py'
 
 
 def get_version():
@@ -186,7 +186,7 @@ def add_mim_extension():
 if __name__ == '__main__':
     add_mim_extension()
     setup(
-        name='mmdet',
+        name='CardSegment',
         version=get_version(),
         description='OpenMMLab Detection Toolbox and Benchmark',
         long_description=readme(),
@@ -195,7 +195,8 @@ if __name__ == '__main__':
         author_email='openmmlab@gmail.com',
         keywords='computer vision, object detection',
         url='https://github.com/open-mmlab/mmdetection',
-        packages=find_packages(exclude=('configs', 'tools', 'demo')),
+        packages= find_namespace_packages(),
+        # packages=find_packages(exclude=('configs', 'tools', 'demo','card_segment'), include=['card_segment']),
         include_package_data=True,
         classifiers=[
             'Development Status :: 5 - Production/Stable',
