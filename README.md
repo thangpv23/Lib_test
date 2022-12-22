@@ -17,7 +17,7 @@ pip install mmdetection/distCardSegment-2.25.1-py3-none-any.whl --force-reinstal
 # Usage
 Import and use
 ```
-from card_segment import CardInference
+from card_segment.infer_lib_test.CardInference
 
 ### load card segmentation model
 
