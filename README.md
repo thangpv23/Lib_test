@@ -17,7 +17,7 @@ pip install mmdetection/distCardSegment-2.25.1-py3-none-any.whl --force-reinstal
 # Usage
 Import and use
 ```
-from card_segment.infer_lib_test.CardInference
+from card_segment.infer_lib_test import CardInference
 
 ### load card segmentation model
 
@@ -45,7 +45,7 @@ model.inference_on_image(img, save_path=path_to_save_folder)
 ```
 Example
 ```
-from card_segment.infer_lib_test.CardInference
+from card_segment.infer_lib_test import CardInference
 
 model = CardInference(checkpoint='/home/trangtnt/projects/yolact_weights/r50_1x8_coco/latest.pth')
 
