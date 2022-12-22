@@ -4,4 +4,4 @@ pycocotools
 six
 terminaltables
 tqdm
--e git+https://github.com/Juvenal-Yescas/mediafire-dl#egg=mediafire_download
+-e git+https://github.com/Juvenal-Yescas/mediafire-dl#egg=mediafire-dl
