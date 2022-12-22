@@ -36,6 +36,7 @@ class CardInference:
                 
                 os.mkdir('../workdir')
                 mediafire_dl.download(url, '../workdir/weight.pth', quiet=False)
+                checkpoint = '../workdir/weight.pth'
             else:
                 checkpoint = '../workdir/weight.pth'
 
@@ -121,13 +122,9 @@ class CardInference:
                                 "bbox": bbox
 
                             })
-                            print("dir", idx)
-                        
 
-                    
-                
                 if save_path is not None:
-                    print ("draw")
+
                     self.__model.show_result(image, results, out_file=os.path.join(save_path, filename + '.jpg'))
             
             # for result in result_dict:
@@ -135,8 +132,8 @@ class CardInference:
 
             #     print('\n')
 
-            print(result_dict)
-            return result_dict
+            # print(result_dict)
+            # return result_dict
 
         else:
             
@@ -144,8 +141,9 @@ class CardInference:
                 save_name = path_to_img.split("\\")[-1].split(".")[0]
             else:
                 save_name = 'output'
-            if save_path is not None and not os.path.exists(save_path):
-                os.makedirs(save_path)
+            if save_path is not None:
+                if not os.path.exists(save_path):
+                    os.mkdir(save_path)
             result_dict[save_name+""] = []
             data, image = self.__preprocess(path_to_img, visualize)
 
@@ -159,7 +157,7 @@ class CardInference:
             for idx, bbox in enumerate (bboxes_raw):
             
                 m, n = np.shape(bbox)
-                print(m, n)
+
                 if m and n:
                 
                     bbox = np.squeeze(bboxes_raw[idx])[:4]
@@ -168,12 +166,13 @@ class CardInference:
                         "bbox": bbox
 
                     })
-                    print("img", idx)
+
 
         
-        if save_path is not None:
-            print ("draw")
-            self.__model.show_result(image, results, out_file=os.path.join(save_path, "safasf"+save_name + '.jpg'))
+            if save_path is not None:
+                if not os.path.exists(save_path):
+                    os.mkdir(save_path)
+                self.__model.show_result(image, results, out_file=os.path.join(save_path, save_name + '.jpg'))
         
         print(result_dict)
         
