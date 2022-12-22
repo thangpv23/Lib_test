@@ -19,7 +19,7 @@ def readme():
     return content
 
 
-version_file = '/card_segment/mmdet/version.py'
+version_file = 'mmdetection/card_segment/mmdet/version.py'
 
 
 def get_version():
