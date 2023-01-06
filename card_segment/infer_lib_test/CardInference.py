@@ -6,7 +6,8 @@ import numpy as np
 import os
 from pathlib import Path
 
-
+from PIL.JpegImagePlugin import JpegImageFile
+from PIL import Image
 CWD = Path(__file__).resolve().parent
 sys.path.append(CWD.as_posix())
 sys.path.append(CWD.parent.as_posix())
@@ -90,13 +91,38 @@ class CardInference:
         self.__model.to(device)
         self.__model.eval()
 
-    def inference_on_image(self, path_to_img, visualize=False, save_path=None, corner=False, debug=False):
+    def inference_on_image(self, img_value, visualize=False, save_path=None, corner=False, debug=False, filename = None):
         result_dict = {}
-        if os.path.isdir(path_to_img):
+        
+        if isinstance(img_value, np.ndarray):
+            result_dict[filename+""] = []
+            # image_tmp =  Image.open(img_value)
+            data, image = self.__preprocess(img_value, visualize)
+            with torch.no_grad():
+                    results = self.__model(return_loss=False, rescale=True, **data)[0]
+                    bboxes_raw, segms_raw = results
+
+        
+            for idx, bbox in enumerate (bboxes_raw):
+                    m, n = np.shape(bbox)
+
+                    if m and n:
+                            bbox = np.squeeze(bboxes_raw[idx])[:4]
+                            result_dict[filename+""].append({
+                                "class": self.__model.CLASSES[idx],
+                                "bbox": bbox
+
+                            })
+
+            if save_path is not None:
+
+                    self.__model.show_result(image, results, out_file=os.path.join(save_path, filename + '.jpg'))
+
+        elif os.path.isdir(img_value):
             
-            for filename in tqdm.tqdm(os.listdir(path_to_img)):
+            for filename in tqdm.tqdm(os.listdir(img_value)):
                 
-                img_path = os.path.join(path_to_img, filename)
+                img_path = os.path.join(img_value, filename)
                 if isinstance(img_path, str):
                     save_name = img_path.split("/")[-1].split(".")[0]
                 else:
@@ -126,26 +152,19 @@ class CardInference:
                 if save_path is not None:
 
                     self.__model.show_result(image, results, out_file=os.path.join(save_path, filename + '.jpg'))
-            
-            # for result in result_dict:
-            #     print(result)
 
-            #     print('\n')
-
-            # print(result_dict)
-            # return result_dict
 
         else:
             
-            if isinstance(path_to_img, str):
-                save_name = path_to_img.split("\\")[-1].split(".")[0]
+            if isinstance(img_value, str):
+                save_name = img_value.split("\\")[-1].split(".")[0]
             else:
                 save_name = 'output'
             if save_path is not None:
                 if not os.path.exists(save_path):
                     os.mkdir(save_path)
             result_dict[save_name+""] = []
-            data, image = self.__preprocess(path_to_img, visualize)
+            data, image = self.__preprocess(img_value, visualize)
 
             with torch.no_grad():
                 results = self.__model(return_loss=False, rescale=True, **data)[0]
@@ -176,7 +195,7 @@ class CardInference:
         
         # print(result_dict)
         
-        return result_dict
+        return str(result_dict)
 
 
 
